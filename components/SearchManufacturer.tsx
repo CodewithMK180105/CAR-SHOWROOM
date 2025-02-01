@@ -1,89 +1,74 @@
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import { manufacturers } from "@/constants";
-import { SetManufacturerProps } from "@/types";
+"use client"
 
-const SearchManufacturer = ({ manufacturer, setManufacturer }: SetManufacturerProps) => {
-  const [query, setQuery] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+import * as React from "react"
+import { Check, ChevronsUpDown } from "lucide-react"
 
-  // Filter manufacturers based on search query
-  const filteredManufacturers =
-    query === ""
-      ? manufacturers
-      : manufacturers.filter((item) =>
-          item.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+
+import { manufacturers } from "@/constants"
+
+export default function ComboboxDemo() {
+  const [open, setOpen] = React.useState(false)
+  const [value, setValue] = React.useState("")
 
   return (
-    <div className="search-manufacturer" ref={dropdownRef}>
-      <div className="relative w-full">
-        {/* Icon Button (Replaces Combobox.Button) */}
-        <button
-          type="button"
-          className="absolute top-[14px] left-3"
-          onClick={() => setIsOpen(!isOpen)}
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
         >
-          <Image src="/car-logo.svg" width={20} height={20} className="ml-4" alt="car logo" />
-        </button>
-
-        {/* Input Field (Replaces Combobox.Input) */}
-        <input
-          type="text"
-          className="search-manufacturer__input ml-2"
-          placeholder="Volkswagen..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => setIsOpen(true)}
-        />
-
-        {/* Dropdown Options (Replaces Combobox.Options) */}
-        {isOpen && (
-          <ul className="mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"> {/* put absolute, if parent element is not overflow-hidden */}
-            {filteredManufacturers.length === 0 && query !== "" ? (
-              <li
-                className="search-manufacturer__option"
-                onClick={() => {
-                  setManufacturer(query);
-                  setQuery(query);
-                  setIsOpen(false);
-                }}
-              >
-                {/* Create "{query}" */}
-                {/* Create */}
-              </li>
-            ) : (
-              filteredManufacturers.map((item) => (
-                <li
-                  key={item}
-                  className="relative search-manufacturer__option hover:bg-primary-blue hover:text-white cursor-pointer px-4 py-2"
-                  onClick={() => {
-                    setManufacturer(item);
-                    setQuery(item);
-                    setIsOpen(false);
+          {value
+            ? manufacturers.find((framework) => framework.value === value)?.label
+            : "Select manufacturer..."}
+          <ChevronsUpDown className="opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search manufacturer..." className="h-9" />
+          <CommandList>
+            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandGroup>
+              {manufacturers.map((framework) => (
+                <CommandItem
+                  key={framework.value}
+                  value={framework.value}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? "" : currentValue)
+                    setOpen(false)
                   }}
                 >
-                  <span className="block truncate">{item}</span>
-                </li>
-              ))
-            )}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default SearchManufacturer;
+                  {framework.label}
+                  <Check
+                    className={cn(
+                      "ml-auto",
+                      value === framework.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  )
+}
