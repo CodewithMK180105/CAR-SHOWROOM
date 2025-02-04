@@ -20,7 +20,7 @@ const CarDetails = ({ car }: CarCardProps) => {
 
       <div className='mt-4 bg-blue-700 p-4 rounded-xl'>
         <Image
-          src="/hero.png"
+          src={"/hero.png"}
           alt="car model"
           width={200}
           height={200}

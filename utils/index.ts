@@ -19,7 +19,7 @@ import axios from 'axios';
 
 export async function fetchCars() {
   try {
-    const response = await axios.get('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla', {
+    const response = await axios.get('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=q3', {
       headers: {
         'x-rapidapi-key': '05d358f57dmsh09ccdd70206b396p1eb3abjsn2f1e98c04059',
         'x-rapidapi-host': 'cars-by-api-ninjas.p.rapidapi.com',
@@ -115,4 +115,20 @@ export function estimateDailyRentalPrice(car: CarProps): number {
   // Ensure the rental price doesn't go below a minimum value
   const MIN_DAILY_RENTAL_PRICE = 20;
   return Math.max(rentalPrice, MIN_DAILY_RENTAL_PRICE);
+}
+
+export const generateCarImageUrl= (car: CarProps, angle?: string)=>{
+  const url= new URL('https://cdn.imagin.studio/getimage');
+
+  const {make, year, model}= car;
+
+  url.searchParams.append('customer', 'hrjavascript-mastery');
+  url.searchParams.append('make', make);
+  url.searchParams.append('modelFamily', model.split(" ")[0]);
+  url.searchParams.append('zoomType', 'fullscreen');
+  url.searchParams.append('modelYear', `${year}`);
+  // url.searchParams.append('zoomLevel', zoomLevel);
+  url.searchParams.append('angle', `${angle}`);
+
+  return `${url}`;
 }
