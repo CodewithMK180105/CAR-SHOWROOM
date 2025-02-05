@@ -94,6 +94,7 @@ import {
 } from "@/components/ui/popover";
 import { manufacturers } from "@/constants";
 import { SearchManufacturerProps } from "@/types";
+import { SearchButton } from './SearchBar';
 
 export default function ComboboxDemo({ manufacturer, setManufacturer }: SearchManufacturerProps) {
   const [open, setOpen] = React.useState(false);
@@ -111,6 +112,7 @@ export default function ComboboxDemo({ manufacturer, setManufacturer }: SearchMa
             ? manufacturers.find((item) => item.value === manufacturer)?.label
             : "Select manufacturer..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          {/* <SearchButton otherClasses="sm:hidden" /> */}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
