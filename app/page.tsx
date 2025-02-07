@@ -2,13 +2,23 @@ import CarCard from "@/components/CarCard";
 import CustomFilter from "@/components/CustomFilter";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
+import { HomeProps } from "@/types";
 import { fetchCars } from "@/utils";
 
-export default async function Home() {
+export default async function Home({searchParams}: HomeProps) {
 
-  const allCars=await fetchCars();
-  // console.log(allCars);
-  const isDataEmpty= !Array.isArray(allCars) || allCars.length<1 || !allCars;
+  const params= await Promise.resolve(searchParams);
+
+  const allCars = await fetchCars({
+    manufacturer: params.manufacturer || "",
+    year: params.year || "2022",
+    fuel: params.fuel || "",
+    // limit: params.limit || "10",
+    model: params.model || "",
+  });
+
+  console.log(allCars);
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
   return (
     <main className="overflow-hidden">

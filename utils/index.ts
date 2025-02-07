@@ -14,24 +14,31 @@
 //     return result;
 // }
 
-import { CarProps } from '@/types';
-import axios from 'axios';
+import { CarProps, FilterProps } from '@/types';
 
-export async function fetchCars() {
-  try {
-    const response = await axios.get('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=q3', {
-      headers: {
-        'x-rapidapi-key': '05d358f57dmsh09ccdd70206b396p1eb3abjsn2f1e98c04059',
-        'x-rapidapi-host': 'cars-by-api-ninjas.p.rapidapi.com',
-      },
-    });
+export async function fetchCars(filters: FilterProps) {
+  const { manufacturer, year, model, fuel } = filters;
 
-    return response.data; // Axios automatically parses JSON
-  } catch (error) {
-    console.error('Error fetching cars:', error);
-    return null; // Handle errors gracefully
-  }
+  // Set the required headers for the API request
+  const headers: HeadersInit = {
+    "x-RapidAPI-Key": "05d358f57dmsh09ccdd70206b396p1eb3abjsn2f1e98c04059",
+    "x-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
+  };
+
+  // Set the required headers for the API request
+  const response = await fetch(
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&fuel_type=${fuel}`,
+    {
+      headers: headers,
+    }
+  );
+
+  // Parse the response as JSON
+  const result = await response.json();
+
+  return result;
 }
+
 
 // Function to estimate car price
 export function estimateCarPrice(car: CarProps): number {
@@ -132,3 +139,5 @@ export const generateCarImageUrl= (car: CarProps, angle?: string)=>{
 
   return `${url}`;
 }
+
+// 05d358f57dmsh09ccdd70206b396p1eb3abjsn2f1e98c04059
