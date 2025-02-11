@@ -1,5 +1,6 @@
 import CarCard from "@/components/CarCard";
 import CustomFilter from "@/components/CustomFilter";
+import FilterYear from "@/components/FilterYear";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
 import { HomeProps } from "@/types";
@@ -17,7 +18,7 @@ export default async function Home({searchParams}: HomeProps) {
     model: params.model || "",
   });
 
-  console.log(allCars);
+  // console.log(allCars);
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
   return (
@@ -34,8 +35,8 @@ export default async function Home({searchParams}: HomeProps) {
           <SearchBar />
 
           <div className="home__filter-container">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
+            <CustomFilter  />
+            <FilterYear  />
           </div>
         </div>
 

@@ -94,7 +94,7 @@ import {
 } from "@/components/ui/popover";
 import { manufacturers } from "@/constants";
 import { SearchManufacturerProps } from "@/types";
-import { SearchButton } from './SearchBar';
+// import { SearchButton } from './SearchBar';
 
 export default function ComboboxDemo({ manufacturer, setManufacturer }: SearchManufacturerProps) {
   const [open, setOpen] = React.useState(false);

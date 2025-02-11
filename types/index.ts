@@ -42,3 +42,22 @@ export interface HomeProps {
     searchParams: FilterProps;
 }
   
+export interface optionProps {
+    title: string,
+    value: string
+}
+
+export interface CustomFilterProps {
+    title: string,
+    options: optionProps[]
+}
+
+export interface SearchFuel {
+    fuel: string,
+    setFuel: (fuel: string)=> void;
+}
+
+export interface SearchYear {
+    year: string,
+    setYear: (year: string)=> void;
+}
