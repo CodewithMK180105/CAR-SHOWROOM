@@ -31,7 +31,7 @@ const CarDetails = ({ car }: CarCardProps) => {
       <div className='w-full mt-2 flex justify-between'>
         <div className='bg-blue-100 p-4 w-[32%] rounded-xl'>
           <Image
-            src="/hero.png"
+            src="/front_image.png"
             alt="car model"
             width={200}
             height={200}
@@ -40,7 +40,7 @@ const CarDetails = ({ car }: CarCardProps) => {
         </div>
         <div className='bg-blue-100 p-4 w-[32%] rounded-xl'>
           <Image
-            src="/hero.png"
+            src="/side_image.png"
             alt="car model"
             width={200}
             height={200}
@@ -49,7 +49,7 @@ const CarDetails = ({ car }: CarCardProps) => {
         </div>
         <div className='bg-blue-100 p-4 w-[32%] rounded-xl'>
           <Image
-            src="/hero.png"
+            src="/back_image.png"
             alt="car model"
             width={200}
             height={200}
