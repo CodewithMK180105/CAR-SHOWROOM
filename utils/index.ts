@@ -1,19 +1,3 @@
-
-// export async function fetchCars(){
-//     const headers={
-//         'x-rapidapi-key': '05d358f57dmsh09ccdd70206b396p1eb3abjsn2f1e98c04059',
-//         'x-rapidapi-host': 'cars-by-api-ninjas.p.rapidapi.com'
-//     }
-
-//     const response=await fetch('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars',{
-//         headers: headers,
-//     });
-
-//     const result=await response.json();
-
-//     return result;
-// }
-
 import { CarProps, FilterProps } from '@/types';
 
 
