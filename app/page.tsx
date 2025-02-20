@@ -8,7 +8,8 @@ import { fetchCars } from "@/utils";
 
 export default async function Home({searchParams}: HomeProps) {
 
-  const params= await Promise.resolve(searchParams);
+  // const params= await Promise.resolve(searchParams);
+  const params=await searchParams;
 
   const allCars = await fetchCars({
     manufacturer: params.manufacturer || "",

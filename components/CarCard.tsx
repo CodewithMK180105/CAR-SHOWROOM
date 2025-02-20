@@ -18,7 +18,8 @@ interface CarCardProps {
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-  const { city_mpg, year, make, model, transmission, drive } = car;
+  // const { city_mpg, year, make, model, transmission, drive } = car;
+  const { city_mpg, make, model, transmission, drive } = car;
 
   const carPrice = estimateDailyRentalPrice(car);
 

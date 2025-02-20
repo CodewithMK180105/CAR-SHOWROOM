@@ -31,15 +31,15 @@ export interface CarProps {
 }
 
 export interface FilterProps {
-    manufacturer: string,
-    year: string,
-    fuel: string,
+    manufacturer?: string,
+    year?: string,
+    fuel?: string,
     // limit: string,
-    model: string,
+    model?: string,
 }
 
 export interface HomeProps {
-    searchParams: FilterProps;
+    searchParams: Promise<FilterProps>;
 }
   
 export interface optionProps {
