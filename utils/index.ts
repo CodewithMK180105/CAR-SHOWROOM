@@ -65,8 +65,12 @@ export function estimateCarPrice(car: CarProps): number {
 
   // Ensure the price doesn't go below a minimum value
   const MIN_PRICE = 5000;
-  return Math.max(price, MIN_PRICE);
+  price = Math.max(price, MIN_PRICE);
+
+  // Limit the decimal places to a maximum of 2
+  return parseFloat(price.toFixed(2));
 }
+
 
 // Function to estimate daily rental price
 export function estimateDailyRentalPrice(car: CarProps): number {
@@ -107,8 +111,12 @@ export function estimateDailyRentalPrice(car: CarProps): number {
 
   // Ensure the rental price doesn't go below a minimum value
   const MIN_DAILY_RENTAL_PRICE = 20;
-  return Math.max(rentalPrice, MIN_DAILY_RENTAL_PRICE);
+  rentalPrice = Math.max(rentalPrice, MIN_DAILY_RENTAL_PRICE);
+
+  // Limit the decimal places to a maximum of 2
+  return parseFloat(rentalPrice.toFixed(2));
 }
+
 
 export const generateCarImageUrl= (car: CarProps, angle?: string)=>{
   const url= new URL('https://cdn.imagin.studio/getimage');
@@ -125,5 +133,3 @@ export const generateCarImageUrl= (car: CarProps, angle?: string)=>{
 
   return `${url}`;
 }
-
-// 05d358f57dmsh09ccdd70206b396p1eb3abjsn2f1e98c04059

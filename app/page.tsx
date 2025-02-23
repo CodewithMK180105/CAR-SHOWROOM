@@ -1,5 +1,6 @@
 import CarCard from "@/components/CarCard";
 import CustomFilter from "@/components/CustomFilter";
+import ExploreCars from "@/components/ExploreCars";
 import FilterYear from "@/components/FilterYear";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
@@ -29,7 +30,7 @@ export default async function Home({searchParams}: HomeProps) {
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
-          <p>Explore the cars you might like</p>
+          <p>Filter the Car, As per your Requirement.</p>
         </div>
 
         <div className="home__filters">
@@ -59,6 +60,10 @@ export default async function Home({searchParams}: HomeProps) {
         }
         
       </div>
+
+      <ExploreCars />
     </main>
   );
 }
+
+// Explore the cars you might like
